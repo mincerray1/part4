@@ -1,8 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpZCI6IjY2NzMwMmExOGYwYmY0YjkyMTQyZGVjNSIsImlhdCI6MTcxODgxODY3NywiZXhwIjoxNzE4ODIyMjc3fQ.S-ttw8lgVQZjNw2fLDNdARv34RYC4xGIaesLMH8T6hs
 
 {
-    "title": "Yahoo Blog 3",
+    "title": "Yahoo Blog 11",
     "author": "Yahoorist",
-    "url": "https://www.yahoo.com/lifestyle/tagged/blog3/"
+    "url": "https://www.yahoo.com/lifestyle/tagged/blog11/"
 }

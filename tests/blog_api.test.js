@@ -1,4 +1,6 @@
 const { test, after, beforeEach } = require('node:test')
+const bcrypt = require('bcrypt')
+const User = require('../models/user')
 const Blog = require('../models/blog')
 
 const mongoose = require('mongoose')
@@ -7,8 +9,11 @@ const supertest = require('supertest')
 const app = require('../app')
 const assert = require('node:assert')
 
+const logger = require('../utils/logger')
+
 
 const api = supertest(app)
+let token = ''
 
 beforeEach(async () => {
     await Blog.deleteMany({})
@@ -17,6 +22,15 @@ beforeEach(async () => {
       let blogObject = new Blog(blog)
       await blogObject.save()
     }
+
+    const loginResponse = 
+        await api
+            .post('/api/login')
+            .send({
+                username: "root",
+                password: "sekret"
+            })
+    token = loginResponse.body.token
 })
 
 test('there are six blogs', async () => {
@@ -39,10 +53,11 @@ test('a valid blog can be added ', async () => {
         url: "http://whattablog.com",
         likes: 20
     }
-  
+    
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set({ Authorization: 'Bearer ' + token })
       .expect(201)
       .expect('Content-Type', /application\/json/)
     
@@ -64,6 +79,7 @@ test('a no like blog can be added that defaults to 0 likes', async () => {
     const response = await api
       .post('/api/blogs')
       .send(newBlog)
+      .set({ Authorization: 'Bearer ' + token })
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
@@ -82,6 +98,7 @@ test('a no title blog is not added', async () => {
     const response = await api
       .post('/api/blogs')
       .send(newBlog)
+      .set({ Authorization: 'Bearer ' + token })
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
@@ -100,6 +117,7 @@ test('a no url blog is not added', async () => {
     const response = await api
       .post('/api/blogs')
       .send(newBlog)
+      .set({ Authorization: 'Bearer ' + token })
       .expect(400)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -108,11 +126,14 @@ test('a no url blog is not added', async () => {
 })
 
 test('a blog can be deleted', async () => {
+    logger.info('start')
     const blogsAtStart = await helper.blogsInDb()
     const blogToDelete = blogsAtStart[0]
   
+    logger.info('before delete')
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
+      .set({ Authorization: 'Bearer ' + token })
       .expect(204)
   
     const blogsAtEnd = await helper.blogsInDb()
