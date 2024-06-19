@@ -2,8 +2,7 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Yahoo Blog",
+    "title": "Yahoo Blog 3",
     "author": "Yahoorist",
-    "url": "https://www.yahoo.com/lifestyle/tagged/blog/",
-    "likes": 8
+    "url": "https://www.yahoo.com/lifestyle/tagged/blog3/"
 }
