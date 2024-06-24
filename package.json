@@ -6,12 +6,15 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test node --test"
+    "test": "cross-env NODE_ENV=test node --test",
+    "cypress:open": "cypress open",
+    "start:test": "NODE_ENV=test node index.js"
   },
   "author": "jrpa",
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "cypress": "^13.12.0",
     "nodemon": "^3.1.3",
     "supertest": "^7.0.0"
   },

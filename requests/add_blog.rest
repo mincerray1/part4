@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpZCI6IjY2NzMwMmExOGYwYmY0YjkyMTQyZGVjNSIsImlhdCI6MTcxODgxODY3NywiZXhwIjoxNzE4ODIyMjc3fQ.S-ttw8lgVQZjNw2fLDNdARv34RYC4xGIaesLMH8T6hs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpZCI6IjY2NzliMThlNTFmOGNmMDk2YWYyZTk5NyIsImlhdCI6MTcxOTI1MTQ4MywiZXhwIjoxNzE5MjU1MDgzfQ.fJoShOnx70WYlCy3QPp6kXvibDYCTV9aEQWN-WS09j8
 
 {
     "title": "Yahoo Blog 11",
     "author": "Yahoorist",
-    "url": "https://www.yahoo.com/lifestyle/tagged/blog11/"
+    "url": "https://www.yahoo.com/lifestyle/tagged/blog11/",
+    "likes": 11
 }

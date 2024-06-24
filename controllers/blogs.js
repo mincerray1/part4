@@ -43,8 +43,6 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     const user = request.user
     const blog = await Blog.findById(request.params.id)
-    logger.info('blog user', blog.user.toString())
-    logger.info('user', user._id.toString())
 
     if (blog.user.toString() === user._id.toString()) {
         await Blog.findByIdAndDelete(request.params.id)
@@ -55,10 +53,18 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     })
 })
 
-blogsRouter.put('/:id', async (request, response) => {
+blogsRouter.put('/:id', userExtractor, async (request, response) => {
+    const user = request.user
     const blog = request.body
-    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true, runValidators: true, context: 'query' })
-    return response.json(updatedBlog)
+
+    if (user !== null) {
+    // if (blog.user.toString() === user._id.toString()) {
+        const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true, runValidators: true, context: 'query' })
+        return response.json(updatedBlog)
+    }
+    return response.status(401).json({
+      error: 'unauthorize to update'
+    })
 })
 
 module.exports = blogsRouter

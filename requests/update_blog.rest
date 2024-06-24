@@ -1,0 +1,11 @@
+PUT http://localhost:3003/api/blogs/66758c39aeb160879a6c6d2a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpZCI6IjY2NzMwMmExOGYwYmY0YjkyMTQyZGVjNSIsImlhdCI6MTcxODk3OTI5OCwiZXhwIjoxNzE4OTgyODk4fQ.CgOcshF3U09fm6KDvUy_6sFd8coRiud4wHqH8lis_ac
+
+{
+  "id": "66758c39aeb160879a6c6d2a",
+  "title": "qqq",
+  "author": "qqq",
+  "url": "qqqq",
+  "likes": 1
+}
